@@ -1,0 +1,20 @@
+<div class="container-fluid">
+  <div class="row">
+    <form [formGroup]="pinForm">
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input
+          formControlName="title"
+          id="title"
+          type="text"
+          class="form-control"
+        />
+        <ngx-select
+          [multiple]="true"
+          [items]="collaboratoryList"
+          formControlName="Collaboratory"
+        ></ngx-select>
+      </div>
+    </form>
+  </div>
+</div>
