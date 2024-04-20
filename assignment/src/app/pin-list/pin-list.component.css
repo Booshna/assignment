@@ -1,3 +1,46 @@
-.table {
-  /* border-collapse: collapse; */
+.modal-backdrop {
+  opacity: 0.9 !important;
+}
+
+.custom-background {
+  background-color: #f0f0f0;
+  height: 100vh;
+}
+
+.custom-table {
+  width: 80%;
+}
+.custom-table th {
+  background-color: #003366;
+  color: #fff;
+}
+
+.custom-table th,
+.custom-table td {
+  text-align: center;
+  padding: 5px;
+  border-spacing: 0;
+}
+
+.custom-table .cust-img {
+  width: 50px;
+  height: auto;
+}
+
+button {
+  background-color: #003366;
+  color: #fff;
+  padding: 8px 10px 8px 10px;
+  border-radius: 5px;
+}
+
+.table-responsive {
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.sticky-header th {
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }

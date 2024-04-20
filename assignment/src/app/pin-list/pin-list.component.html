@@ -1,33 +1,36 @@
-<button type="button" class="btn btn-primary">+ Add Customer</button>
-<button type="button" class="btn btn-primary">+ Add Pin</button>
+<div class="container-fluid custom-background">
+  <div class="row justify-content-end p-3">
+    <div class="col-auto">
+      <button type="button" (click)="openCustomer()">+ Add Customer</button>
+    </div>
+    <div class="col-auto">
+      <button type="button" (click)="openPin()">+ Add Pin</button>
+    </div>
+  </div>
 
-<table class="table table-bordered">
-  <thead>
-    <tr>
-      <th scope="col">Title</th>
-      <th scope="col">Image</th>
-      <th scope="col">Collaboratory</th>
-      <th scope="col">Privacy</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>the Bird</td>
-      <td>twitter</td>
-    </tr>
-  </tbody>
-</table>
+  <div class="offset-lg-2">
+    <h2>List of customers</h2>
+    <div class="table-responsive">
+      <table class="table table-bordered custom-table">
+        <thead class="sticky-header">
+          <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Image</th>
+            <th scope="col">Collaboratory</th>
+            <th scope="col">Privacy</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of pinList">
+            <td>{{ item.title }}</td>
+            <td>
+              <img class="cust-img" src="{{ item.image }}" alt="Base64 Image" />
+            </td>
+            <td>{{ item.collaborators }}</td>
+            <td>{{ item.privacy }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
