@@ -37,15 +37,8 @@ export class CustomerComponent {
 
   getRegion() {
     this.httpService.getRegion().subscribe((data) => {
-      // @ts-ignore
-
-      this.responseData = Object.values(data.data);
-      console.log(this.responseData);
-
-      // Extract unique regions using a Set
+      this.responseData = Object.values(data['data']);
       const uniqueRegions = new Set(this.responseData.map(value => value.region));
-
-      // Convert Set to an array
       this.uniqueRegionsArray = Array.from(uniqueRegions);
 
     });
@@ -53,19 +46,15 @@ export class CustomerComponent {
   }
 
   filterCountries(regionToFilter: string) {
-    console.log(regionToFilter, "REGFION");
 
     const countryList = this.responseData.filter(country => country.region === regionToFilter);
     this.countryList = countryList.map(item => ({ id: item.country, text: item.country }));
 
-    console.log(this.countryList);
 
 
   }
 
   submit() {
-    console.log(this.customerForm);
-    // localStorage.setItem('country', JSON.parse(this.customerForm.value));
     this.storageService.setDataInLocalStorage('customers', this.customerForm.value);
     this.dialogRef.close();
 

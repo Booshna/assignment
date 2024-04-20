@@ -1,21 +1,28 @@
 <div class="container-fluid">
   <div class="row pt-3">
     <div class="col-lg-8 offset-lg-2">
-      <h2 class="title">Create PIN</h2>
-      <form [formGroup]="pinForm" class="custom-form">
+      <h4
+        class="text-center text-white py-2 mb-0"
+        style="background-color: #003366"
+      >
+        Create PIN
+      </h4>
+      <form [formGroup]="pinForm" class="bg-white border rounded p-5">
+        <!-- Title Field -->
         <div class="form-group row">
-          <label for="title" class="col-sm-3"
-            >Title<span class="error-icon"> *</span> :</label
-          >
+          <label for="title" class="col-sm-3 col-form-label text-right">
+            Title<span class="text-danger"> *</span>:
+          </label>
           <div class="col-sm-9">
             <input
               formControlName="title"
               id="title"
               type="text"
               class="form-control"
+              placeholder="Enter title"
             />
             <div
-              class="error-icon"
+              class="text-danger"
               *ngIf="
                 pinForm.get('title').invalid &&
                 (pinForm.get('title').dirty || pinForm.get('title').touched)
@@ -25,14 +32,16 @@
             </div>
           </div>
         </div>
+
+        <!-- Image Upload Field -->
         <div class="form-group row">
-          <label for="image" class="col-sm-3"
-            >Select Image<span class="error-icon"> *</span> :</label
-          >
+          <label for="image" class="col-sm-3 col-form-label text-right">
+            Select Image<span class="text-danger"> *</span>:
+          </label>
           <div class="col-sm-9">
             <input
               type="file"
-              class="file-input"
+              class="d-none"
               ng2FileSelect
               [uploader]="uploader"
               multiple
@@ -40,20 +49,21 @@
             <div
               ng2FileDrop
               [uploader]="uploader"
-              class="my-drop-zone"
-              (fileOver)="fileOverAnother($event)"
-              [ngClass]="{ 'another-file-over-class': hasAnotherDropZoneOver }"
+              class="border p-2 text-center"
             >
-              <span *ngIf="!fileName"> Choose & Drag and Drop file Here</span>
+              <span *ngIf="!fileName"
+                >Drag and drop file here, or click to select files</span
+              >
               <span>{{ fileName }}</span>
             </div>
           </div>
         </div>
 
+        <!-- Collaboratory Field -->
         <div class="form-group row">
-          <label for="Collaboratory" class="col-sm-3"
-            >Select Collaboratory<span class="error-icon"> *</span> :</label
-          >
+          <label for="Collaboratory" class="col-sm-3 col-form-label text-right">
+            Select Collaboratory<span class="text-danger"> *</span>:
+          </label>
           <div class="col-sm-9">
             <ngx-select
               [multiple]="true"
@@ -62,21 +72,35 @@
             ></ngx-select>
           </div>
         </div>
+
+        <!-- Privacy Field -->
         <div class="form-group row">
-          <label for="privacy" class="col-sm-3"
-            >Privacy<span class="error-icon"> *</span> :</label
-          >
-          <div class="col-sm-9">
-            <label class="radio-label">
-              <input type="radio" formControlName="privacy" value="private" />
-              Private
-            </label>
-            <label class="radio-label">
-              <input type="radio" formControlName="privacy" value="public" />
-              Public
-            </label>
+          <label for="privacy" class="col-sm-3 col-form-label text-right">
+            Privacy<span class="text-danger"> *</span>:
+          </label>
+          <div class="col-sm-9 d-flex align-items-center">
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="radio"
+                formControlName="privacy"
+                id="private"
+                value="private"
+              />
+              <label class="form-check-label" for="private">Private</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="radio"
+                formControlName="privacy"
+                id="public"
+                value="public"
+              />
+              <label class="form-check-label" for="public">Public</label>
+            </div>
             <div
-              class="error-icon"
+              class="text-danger"
               *ngIf="
                 pinForm.get('privacy').invalid &&
                 (pinForm.get('privacy').dirty || pinForm.get('privacy').touched)
@@ -87,6 +111,7 @@
           </div>
         </div>
 
+        <!-- Action Buttons -->
         <div class="row justify-content-center">
           <div class="col-auto">
             <button

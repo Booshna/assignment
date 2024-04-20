@@ -1,1 +1,55 @@
 /* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,300;6..12,400;6..12,500;6..12,700&display=swap");
+
+html,
+body {
+  height: 100%;
+  font-family: "Nunito Sans", sans-serif;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.save-btn {
+  background-color: #003366;
+  color: #fff;
+  padding: 3px 12px;
+  font-size: 14px;
+  border-radius: 3.5px;
+  width: 90px;
+  height: 40px;
+}
+
+.cancel-btn {
+  padding: 3px 12px;
+  font-size: 14px;
+  border-radius: 3.5px;
+  width: 90px;
+  height: 40px;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  background-color: #115294;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Style the scrollbar track */
+::-webkit-scrollbar-track {
+  background: #003366; /* color of the tracking area */
+}
+
+/* Style the scrollbar handle */
+::-webkit-scrollbar-thumb {
+  background: #003366; /* color of the scroll thumb */
+  border-radius: 10px; /* roundness of the scroll thumb */
+}
+
+/* Style the scrollbar handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #003366; /* color of the scroll thumb on hover */
+}

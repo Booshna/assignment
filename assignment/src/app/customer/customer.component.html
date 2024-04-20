@@ -1,11 +1,16 @@
 <div class="container-fluid">
   <div class="row pt-3">
     <div class="col-lg-8 offset-lg-2">
-      <h2 class="title">Create Customer</h2>
-      <form [formGroup]="customerForm" class="custom-form">
+      <h4
+        class="text-center text-white py-2 mb-0"
+        style="background-color: #003366"
+      >
+        Create Customer
+      </h4>
+      <form [formGroup]="customerForm" class="border rounded p-3 bg-white">
         <div class="form-group row">
-          <label for="title" class="col-sm-2"
-            >Title<span class="error-icon"> *</span> :</label
+          <label for="title" class="col-sm-2 col-form-label"
+            >Title<span class="text-danger"> *</span> :</label
           >
           <div class="col-sm-10">
             <input
@@ -17,9 +22,9 @@
               required
             />
             <div
-              class="error-icon"
+              class="text-danger"
               *ngIf="
-                customerForm.get('title').invalid &&
+                customerForm.get('title').errors &&
                 (customerForm.get('title').dirty ||
                   customerForm.get('title').touched)
               "
@@ -30,7 +35,7 @@
         </div>
         <div class="form-group row">
           <label for="email" class="col-sm-2"
-            >Email<span class="error-icon"> *</span> :</label
+            >Email<span class="text-danger"> *</span> :</label
           >
           <div class="col-sm-10">
             <input
@@ -42,9 +47,9 @@
               required
             />
             <div
-              class="error-icon"
+              class="text-danger"
               *ngIf="
-                customerForm.get('email').invalid &&
+                customerForm.get('email').errors &&
                 (customerForm.get('email').dirty ||
                   customerForm.get('email').touched)
               "
@@ -55,7 +60,7 @@
         </div>
         <div class="form-group row">
           <label for="region" class="col-sm-2"
-            >Region<span class="error-icon"> *</span> :</label
+            >Region<span class="text-danger"> *</span> :</label
           >
           <div class="col-sm-10">
             <ngx-select
@@ -66,9 +71,9 @@
               required
             ></ngx-select>
             <div
-              class="error-icon"
+              class="text-danger"
               *ngIf="
-                customerForm.get('region').invalid &&
+                customerForm.get('region').errors &&
                 (customerForm.get('region').dirty ||
                   customerForm.get('region').touched)
               "
@@ -79,7 +84,7 @@
         </div>
         <div class="form-group row">
           <label for="country" class="col-sm-2"
-            >Country<span class="error-icon"> *</span> :</label
+            >Country<span class="text-danger"> *</span> :</label
           >
           <div class="col-sm-10">
             <ngx-select
@@ -89,9 +94,9 @@
               required
             ></ngx-select>
             <div
-              class="error-icon"
+              class="text-danger"
               *ngIf="
-                customerForm.get('country').invalid &&
+                customerForm.get('country').errors &&
                 (customerForm.get('country').dirty ||
                   customerForm.get('country').touched)
               "
@@ -111,7 +116,12 @@
             </button>
           </div>
           <div class="col-auto">
-            <button type="button" class="save-btn" (click)="submit()">
+            <button
+              type="submit"
+              [disabled]="customerForm.invalid"
+              class="save-btn"
+              (click)="submit()"
+            >
               Save
             </button>
           </div>
