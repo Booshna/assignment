@@ -1,20 +1,114 @@
 <div class="container-fluid">
-  <div class="row">
-    <form [formGroup]="pinForm">
-      <div class="form-group">
-        <label for="title">Title</label>
-        <input
-          formControlName="title"
-          id="title"
-          type="text"
-          class="form-control"
-        />
-        <ngx-select
-          [multiple]="true"
-          [items]="collaboratoryList"
-          formControlName="Collaboratory"
-        ></ngx-select>
-      </div>
-    </form>
+  <div class="row pt-3">
+    <div class="col-lg-8 offset-lg-2">
+      <h2 class="title">Create PIN</h2>
+      <form [formGroup]="pinForm" class="custom-form">
+        <div class="form-group row">
+          <label for="title" class="col-sm-3"
+            >Title<span class="error-icon"> *</span> :</label
+          >
+          <div class="col-sm-9">
+            <input
+              formControlName="title"
+              id="title"
+              type="text"
+              class="form-control"
+            />
+            <div
+              class="error-icon"
+              *ngIf="
+                pinForm.get('title').invalid &&
+                (pinForm.get('title').dirty || pinForm.get('title').touched)
+              "
+            >
+              Title is required
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="image" class="col-sm-3"
+            >Select Image<span class="error-icon"> *</span> :</label
+          >
+          <div class="col-sm-9">
+            <input
+              type="file"
+              class="file-input"
+              ng2FileSelect
+              [uploader]="uploader"
+              multiple
+            />
+            <div
+              ng2FileDrop
+              [uploader]="uploader"
+              class="my-drop-zone"
+              (fileOver)="fileOverAnother($event)"
+              [ngClass]="{ 'another-file-over-class': hasAnotherDropZoneOver }"
+            >
+              <span *ngIf="!fileName"> Choose & Drag and Drop file Here</span>
+              <span>{{ fileName }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="Collaboratory" class="col-sm-3"
+            >Select Collaboratory<span class="error-icon"> *</span> :</label
+          >
+          <div class="col-sm-9">
+            <ngx-select
+              [multiple]="true"
+              [items]="customerList"
+              formControlName="collaborators"
+            ></ngx-select>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="privacy" class="col-sm-3"
+            >Privacy<span class="error-icon"> *</span> :</label
+          >
+          <div class="col-sm-9">
+            <label class="radio-label">
+              <input type="radio" formControlName="privacy" value="private" />
+              Private
+            </label>
+            <label class="radio-label">
+              <input type="radio" formControlName="privacy" value="public" />
+              Public
+            </label>
+            <div
+              class="error-icon"
+              *ngIf="
+                pinForm.get('privacy').invalid &&
+                (pinForm.get('privacy').dirty || pinForm.get('privacy').touched)
+              "
+            >
+              Privacy is required
+            </div>
+          </div>
+        </div>
+
+        <div class="row justify-content-center">
+          <div class="col-auto">
+            <button
+              type="button"
+              class="btn btn-secondary cancel-btn"
+              (click)="clearForm()"
+            >
+              Cancel
+            </button>
+          </div>
+          <div class="col-auto">
+            <button
+              type="submit"
+              [disabled]="pinForm.invalid"
+              class="save-btn"
+              (click)="submit()"
+            >
+              Save
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
   </div>
 </div>

@@ -1,0 +1,20 @@
+.radio-label {
+  margin-right: 20px;
+  font-weight: 400;
+}
+
+.my-drop-zone {
+  border: 2px dashed #ccc;
+  border-radius: 5px;
+  padding: 1px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.another-file-over-class {
+  border-color: #4caf50;
+}
+
+.file-input {
+  display: none;
+}
