@@ -47,6 +47,7 @@
               multiple
             />
             <div
+              [ngClass]="{ 'another-file-over-class': hasAnotherDropZoneOver }"
               ng2FileDrop
               [uploader]="uploader"
               class="border p-2 text-center"
