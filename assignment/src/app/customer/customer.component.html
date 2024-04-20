@@ -1,1 +1,122 @@
-<p>customer works!</p>
+<div class="container-fluid">
+  <div class="row pt-3">
+    <div class="col-lg-8 offset-lg-2">
+      <h2 class="title">Create Customer</h2>
+      <form [formGroup]="customerForm" class="custom-form">
+        <div class="form-group row">
+          <label for="title" class="col-sm-2"
+            >Title<span class="error-icon"> *</span> :</label
+          >
+          <div class="col-sm-10">
+            <input
+              formControlName="title"
+              id="title"
+              type="text"
+              class="form-control"
+              placeholder="Enter title"
+              required
+            />
+            <div
+              class="error-icon"
+              *ngIf="
+                customerForm.get('title').invalid &&
+                (customerForm.get('title').dirty ||
+                  customerForm.get('title').touched)
+              "
+            >
+              Title is required
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="email" class="col-sm-2"
+            >Email<span class="error-icon"> *</span> :</label
+          >
+          <div class="col-sm-10">
+            <input
+              formControlName="email"
+              id="email"
+              type="email"
+              class="form-control"
+              placeholder="Enter email"
+              required
+            />
+            <div
+              class="error-icon"
+              *ngIf="
+                customerForm.get('email').invalid &&
+                (customerForm.get('email').dirty ||
+                  customerForm.get('email').touched)
+              "
+            >
+              Email is required
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="region" class="col-sm-2"
+            >Region<span class="error-icon"> *</span> :</label
+          >
+          <div class="col-sm-10">
+            <ngx-select
+              [items]="uniqueRegionsArray"
+              formControlName="region"
+              (select)="filterCountries($event)"
+              placeholder="Select region"
+              required
+            ></ngx-select>
+            <div
+              class="error-icon"
+              *ngIf="
+                customerForm.get('region').invalid &&
+                (customerForm.get('region').dirty ||
+                  customerForm.get('region').touched)
+              "
+            >
+              Region is required
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="country" class="col-sm-2"
+            >Country<span class="error-icon"> *</span> :</label
+          >
+          <div class="col-sm-10">
+            <ngx-select
+              [items]="countryList"
+              formControlName="country"
+              placeholder="Select country"
+              required
+            ></ngx-select>
+            <div
+              class="error-icon"
+              *ngIf="
+                customerForm.get('country').invalid &&
+                (customerForm.get('country').dirty ||
+                  customerForm.get('country').touched)
+              "
+            >
+              Country is required
+            </div>
+          </div>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-auto">
+            <button
+              type="button"
+              class="btn btn-secondary cancel-btn"
+              (click)="clearForm()"
+            >
+              Cancel
+            </button>
+          </div>
+          <div class="col-auto">
+            <button type="button" class="save-btn" (click)="submit()">
+              Save
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
