@@ -1,7 +1,13 @@
 import { Component, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FileUploader, FileLikeObject } from 'ng2-file-upload';
-import { FormBuilder, FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  FormControl,
+  Validators,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { NgxSelectModule } from 'ngx-select-ex';
 import { FileUploadModule } from 'ng2-file-upload';
 import { StorageService } from '../services/storage.service';
@@ -12,9 +18,14 @@ const URL = 'http://localhost:3000/fileupload/';
 @Component({
   selector: 'app-pin',
   standalone: true,
-  imports: [NgxSelectModule, ReactiveFormsModule, CommonModule, FileUploadModule],
+  imports: [
+    NgxSelectModule,
+    ReactiveFormsModule,
+    CommonModule,
+    FileUploadModule,
+  ],
   templateUrl: './pin.component.html',
-  styleUrls: ['./pin.component.css']
+  styleUrls: ['./pin.component.css'],
 })
 export class PinComponent {
   pinForm: FormGroup<any>;
@@ -22,39 +33,39 @@ export class PinComponent {
   public uploader: FileUploader = new FileUploader({
     url: URL,
     disableMultipart: true,
-    allowedMimeType: ['image/png', 'image/jpg', 'image/jpeg', 'image/gif']
-
-
+    allowedMimeType: ['image/png', 'image/jpg', 'image/jpeg', 'image/gif'],
   });
 
   public hasAnotherDropZoneOver: boolean = false;
 
   fileObject: any;
-  customerList: { id: any; text: any; }[];
+  customerList: { id: any; text: any }[];
   fileName: any;
 
-  constructor(private formBuilder: FormBuilder, private storageService: StorageService, public dialogRef: MatDialogRef<PinComponent>
+  constructor(
+    private formBuilder: FormBuilder,
+    private storageService: StorageService,
+    public dialogRef: MatDialogRef<PinComponent>
   ) {
-
     this.uploader.onAfterAddingFile = (fileItem) => {
       this.convertToBase64(fileItem);
     };
-
   }
 
   ngOnInit() {
-    this.pinForm = this.formBuilder.group(
-      {
-        title: new FormControl('', [Validators.required]),
-        image: new FormControl('', [Validators.required]),
-        collaborators: new FormControl(null, [Validators.required]),
-        privacy: new FormControl('', [Validators.required]),
-
-      })
-    const customerList = this.storageService.getDataFromLocalStorage('customers');
-    this.customerList = customerList.map(item => ({ id: item.title, text: item.title }));
-
-
+    this.pinForm = this.formBuilder.group({
+      title: new FormControl('', [Validators.required]),
+      image: new FormControl('', [Validators.required]),
+      collaborators: new FormControl(null, [Validators.required]),
+      privacy: new FormControl('', [Validators.required]),
+    });
+    const customerList =
+      this.storageService.getDataFromLocalStorage('customers');
+    //format data as key and value pair for ngx-select dropdown.
+    this.customerList = customerList.map((item) => ({
+      id: item.title,
+      text: item.title,
+    }));
   }
 
   convertToBase64(fileItem: any) {
@@ -63,7 +74,7 @@ export class PinComponent {
     reader.onload = (event: any) => {
       const base64String = event.target.result;
       console.log(base64String);
-      this.pinForm.patchValue({ image: base64String })
+      this.pinForm.patchValue({ image: base64String });
     };
     reader.readAsDataURL(fileItem._file);
   }
@@ -72,20 +83,13 @@ export class PinComponent {
     this.hasAnotherDropZoneOver = e;
   }
 
-
   submit() {
-    console.log(this.pinForm);
     this.storageService.setDataInLocalStorage('pin', this.pinForm.value);
     this.dialogRef.close();
-
   }
 
   clearForm() {
-
     this.dialogRef.close();
     this.pinForm.reset();
-
-
   }
-
 }

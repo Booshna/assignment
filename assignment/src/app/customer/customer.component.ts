@@ -38,26 +38,22 @@ export class CustomerComponent {
   getRegion() {
     this.httpService.getRegion().subscribe((data) => {
       this.responseData = Object.values(data['data']);
+      // new Set() func is to get unique regions from response as objects
       const uniqueRegions = new Set(this.responseData.map(value => value.region));
+      //Array.from() func is used to convert objs as Array.
       this.uniqueRegionsArray = Array.from(uniqueRegions);
-
     });
-
   }
 
+  //Filter Countries based on region selection
   filterCountries(regionToFilter: string) {
-
     const countryList = this.responseData.filter(country => country.region === regionToFilter);
     this.countryList = countryList.map(item => ({ id: item.country, text: item.country }));
-
-
-
   }
 
   submit() {
     this.storageService.setDataInLocalStorage('customers', this.customerForm.value);
     this.dialogRef.close();
-
 
   }
 
