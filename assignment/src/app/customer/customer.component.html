@@ -2,12 +2,16 @@
   <div class="row pt-3">
     <div class="col-lg-8 offset-lg-2">
       <h4
-        class="text-center text-white py-2 mb-0"
-        style="background-color: #003366"
+        class="text-center py-2 mb-0"
+        style="background-color: #003366; color: #d3d3d3"
       >
         Create Customer
       </h4>
-      <form [formGroup]="customerForm" class="border rounded p-3 bg-white">
+      <form
+        [formGroup]="customerForm"
+        (ngSubmit)="submit()"
+        class="border rounded p-3 bg-white"
+      >
         <div class="form-group row">
           <label for="title" class="col-sm-2 col-form-label"
             >Title<span class="text-danger"> *</span> :</label
@@ -22,11 +26,10 @@
               required
             />
             <div
-              class="text-danger"
+              class="text-danger py-2"
               *ngIf="
                 customerForm.get('title').errors &&
-                (customerForm.get('title').dirty ||
-                  customerForm.get('title').touched)
+                customerForm.get('title').touched
               "
             >
               Title is required
@@ -46,15 +49,20 @@
               placeholder="Enter email"
               required
             />
+
             <div
-              class="text-danger"
               *ngIf="
                 customerForm.get('email').errors &&
-                (customerForm.get('email').dirty ||
-                  customerForm.get('email').touched)
+                customerForm.get('email').touched
               "
+              class="text-danger py-2"
             >
-              Email is required
+              <div *ngIf="customerForm.get('email').errors['required']">
+                Email is required
+              </div>
+              <div *ngIf="customerForm.get('email').errors['email']">
+                Invalid email format
+              </div>
             </div>
           </div>
         </div>
@@ -120,7 +128,6 @@
               type="submit"
               [disabled]="customerForm.invalid"
               class="save-btn"
-              (click)="submit()"
             >
               Save
             </button>

@@ -16,7 +16,12 @@ export class StorageService {
   // Function to store data in local storage
   setDataInLocalStorage(key: string, newData: any): void {
     let existingData = this.getDataFromLocalStorage(key);
-    existingData.push(newData);
-    localStorage.setItem(key, JSON.stringify(existingData));
+
+
+    if (!existingData.some(item => item === newData)) {
+
+      existingData.push(newData);
+      localStorage.setItem(key, JSON.stringify(existingData));
+    }
   }
 }
