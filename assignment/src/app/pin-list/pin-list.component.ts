@@ -25,6 +25,7 @@ export class PinListComponent {
     this.getPinList();
   }
 
+
   getPinList() {
     this.pinList = this.storageService.getDataFromLocalStorage('pin')
   }
@@ -33,7 +34,7 @@ export class PinListComponent {
     const dialogRef = this.dialog.open(CustomerComponent, {
       width: '1000px',
       height: '450px',
-      data: { name: 'John' }
+      autoFocus: false
     });
 
 
@@ -42,7 +43,8 @@ export class PinListComponent {
   openPin() {
     const dialogRef = this.dialog.open(PinComponent, {
       width: '1000px',
-      height: '450px'
+      height: '450px',
+      autoFocus: false
     });
 
     dialogRef.afterClosed().subscribe(result => {
