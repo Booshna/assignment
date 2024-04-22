@@ -3,18 +3,16 @@
     <div class="col-auto">
       <button
         type="button"
-        class="btn-custom text-white"
         (click)="openCustomer()"
+        class="btn-custom"
+        data-toggle="modal"
+        data-target="#customerModal"
       >
         + Add Customer
       </button>
     </div>
     <div class="col-auto">
-      <button
-        type="button"
-        class="btn-custom text-white rounded"
-        (click)="openPin()"
-      >
+      <button type="button" class="btn-custom rounded" (click)="openPin()">
         + Add Pin
       </button>
     </div>
@@ -40,6 +38,10 @@
             </td>
             <td>{{ item.collaborators }}</td>
             <td>{{ item.privacy }}</td>
+          </tr>
+
+          <tr *ngIf="pinList.length === 0" class="text-center h4">
+            <td colspan="4">No Data Found</td>
           </tr>
         </tbody>
       </table>
